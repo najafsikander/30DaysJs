@@ -66,21 +66,33 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    function firstLetterOfLastName (name) {
-      // const names = name.split(', ');
-      // const letter = names[1].charAt(0);
-      // return letter;
-      const newName = name.toString().replace(', ',' ');
-      console.log(newName);
-      return newName;
-    }
-    const sortedAlphabatically = people.sort((a,b) => firstLetterOfLastName(a) - firstLetterOfLastName(b));
-    console.table(sortedAlphabatically);
+    const sortedPersons = people.sort((a,b) => {
+      const [aLastName, aFirstName] = a.split(', ').reverse();
+      const [bLastName, bFirstName] = b.split(', ').reverse();
+      return aLastName.localeCompare(bLastName);
+    });
+
+    console.log(sortedPersons);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const setData = [...new Set(data)];
 
+    const getCount = (item) => {
+      count = 0;
+      for(let i =0; i <data.length; i++) {
+        if(item === data[i]) count++;
+      }
+      console.log(item, count);
+      return count;
+    }
+
+    const sumData = setData.reduce((obj, item) => {
+      obj[item] = getCount(item);
+      return obj;
+    }, {})
+    console.log(sumData)
   </script>
 </body>
 </html>
